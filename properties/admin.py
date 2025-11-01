@@ -1,3 +1,17 @@
-from django.contrib import admin
+"""
+Admin configuration for properties app.
+"""
 
-# Register your models here.
+from django.contrib import admin
+from .models import Property
+
+
+@admin.register(Property)
+class PropertyAdmin(admin.ModelAdmin):
+    """
+    Admin interface for Property model.
+    """
+    list_display = ('title', 'location', 'price', 'created_at')
+    list_filter = ('location', 'created_at')
+    search_fields = ('title', 'description', 'location')
+    ordering = ('-created_at',)
